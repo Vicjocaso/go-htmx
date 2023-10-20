@@ -1,0 +1,53 @@
+{{define "invoice"}}
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script
+    src="https://unpkg.com/htmx.org@1.9.2"
+    integrity="sha384-L6OqL9pRWyyFU3+/bjdSri+iIphTN/bvYyM37tICVyOJkWZLpP2vGn6VUEXgzg6h"
+    crossorigin="anonymous"
+  ></script>
+</head>
+<body class="rounded-lg p-10 dark:bg-slate-800">
+  {{ block "invoices" .}} {{ range .}}
+  <div
+    hx-get="/invoice/{{.Id}}"
+    class="my-6 cursor-pointer divide-gray-100 rounded-lg border px-5 py-1.5 font-semibold leading-6 shadow-lg hover:bg-slate-500 hover:text-white dark:bg-indigo-600 dark:text-slate-50 dark:hover:bg-indigo-800"
+  >
+    <li class="flex justify-between gap-x-6 py-5">
+      <div class="flex gap-x-4">
+        <div class="min-w-0 flex-auto">
+          <p class="text-sm font-semibold leading-6">
+            Client Name: {{.Client}}
+          </p>
+          <p class="mt-1 truncate text-xs leading-5">Invoice ID: {{.Id}}</p>
+        </div>
+      </div>
+      <div class="flex gap-x-4">
+        <div class="min-w-0 flex-auto">
+          <p class="text-sm font-semibold leading-6">Total:</p>
+          <p class="text-md mt-1 truncate leading-5">${{.Price}}</p>
+        </div>
+      </div>
+      <div class="">
+        <div>
+          <p class="text-sm leading-6">{{.Status}}</p>
+        </div>
+        <p class="mt-1 text-xs leading-5">Invoice Date:&nbsp;&nbsp;</p>
+        <div>
+          <button class="border" hx-put="/invoice/{{.Id}}">
+            &#10003
+          </button>
+          <button hx-get="/invoice/{{.Id}}">&#x2717</button>
+        </div>
+      </div>
+    </li>
+  </div>
+  {{ end }} {{ end }}
+</body>
+
+{{ end }}
+
+<!-- {{template "invoice" .}} -->

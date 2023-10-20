@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Go + htmx</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script
+      src="https://unpkg.com/htmx.org@1.9.2"
+      integrity="sha384-L6OqL9pRWyyFU3+/bjdSri+iIphTN/bvYyM37tICVyOJkWZLpP2vGn6VUEXgzg6h"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body class="rounded-lg p-10 dark:bg-slate-800">
+    <div class="flex justify-between dark:text-slate-50">
+      <div>
+        <p class="text-2xl font-semibold">Invoice</p>
+        <p>There are total 1 invoices</p>
+      </div>
+      <div>
+        <a
+          href="/invoice"
+          class="text-sm text-center rounded-md bg-indigo-700 p-4 cursor-pointer"
+          >Add New</a
+        >
+      </div>
+    </div>
+    {{ template "invoice" . }}
+    <div class="col-4">{{template "invoice-form" .}}</div>
+  </body>
+</html>
